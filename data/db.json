@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "name": "User 001",
+      "pushToken": "ExponentPushToken[OdJiNHAd5IdCKDLE0UJGv4]",
+      "trackingDesired": true,
+      "locations": [
+        {
+          "latitude": 22.34132958,
+          "longitude": 73.17760975,
+          "timestamp": "2025-11-07T12:21:36.120Z"
+        },
+        {
+          "latitude": 22.33731026,
+          "longitude": 73.17871886,
+          "timestamp": "2025-11-07T12:23:24.185Z"
+        },
+        {
+          "latitude": 22.33357127,
+          "longitude": 73.18045018,
+          "timestamp": "2025-11-07T12:25:12.312Z"
+        },
+        {
+          "latitude": 22.3295214,
+          "longitude": 73.18150798,
+          "timestamp": "2025-11-07T12:27:00.304Z"
+        },
+        {
+          "latitude": 22.327631,
+          "longitude": 73.17991638,
+          "timestamp": "2025-11-07T12:28:46.619Z"
+        },
+        {
+          "latitude": 22.340511,
+          "longitude": 73.1788137,
+          "timestamp": "2025-11-07T12:53:12.058Z"
+        },
+        {
+          "latitude": 22.34255981,
+          "longitude": 73.18555177,
+          "timestamp": "2025-11-07T12:54:42.427Z"
+        },
+        {
+          "latitude": 22.33678174,
+          "longitude": 73.1788589,
+          "timestamp": "2025-11-07T13:00:15.490Z"
+        },
+        {
+          "latitude": 22.33678174,
+          "longitude": 73.1788589,
+          "timestamp": "2025-11-07T13:00:15.511Z"
+        },
+        {
+          "latitude": 22.3404418,
+          "longitude": 73.1787437,
+          "timestamp": "2025-11-07T13:06:24.333Z"
+        }
+      ],
+      "currentLocation": {
+        "latitude": 22.3404418,
+        "longitude": 73.1787437
+      },
+      "lastSeen": "2025-11-07T13:06:24.333Z"
+    }
+  ]
+}
