@@ -6,6 +6,7 @@ async function sendPush(expoPushToken, action) {
     // title: action === "start" ? "Start tracking" : "Stop tracking",
     // body: action === "start" ? "Tracking requested" : "Tracking stopped",
     // sound: null,
+     priority: "high",
     data: { action: action === "start" ? "StartGettingLocation" : "StopGettingLocation" }
   };
   console.log("Sending push:", body);

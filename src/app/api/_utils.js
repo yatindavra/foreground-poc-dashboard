@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-const dbPath = path.join(process.cwd(), "data", "db.json");
+const dbPath = path.join(process.cwd(), "tmp", "db.json");
 
 export async function readDB() {
   try {
