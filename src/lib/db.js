@@ -1,9 +1,9 @@
 
-// lib/dbConnect.js
+// lib/db.js
 import { MongoClient } from 'mongodb';
+import { DATABASE_URL } from './const';
 
-// const uri = process.env.MONGODB_URI;
-const uri = 'mongodb+srv://yatindavra:davrayatin@cluster0.c5zi4fb.mongodb.net/?appName=Cluster0'
+const uri = DATABASE_URL;
 const options = {}; // Add options as needed, e.g., { useNewUrlParser: true, useUnifiedTopology: true }
 
 if (!uri) {

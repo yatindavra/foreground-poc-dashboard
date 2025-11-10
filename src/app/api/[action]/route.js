@@ -1,19 +1,24 @@
 import { findUser, setTracking } from "../_utils";
 
 async function sendPush(expoPushToken, action) {
-  const body = {
-    to: expoPushToken,
-    priority: "high",
-    data: { action: action === "start" ? "StartGettingLocation" : "StopGettingLocation" }
-  };
+  try {
+    const body = {
+      to: expoPushToken,
+      priority: "high",
+      data: { action: action === "start" ? "StartGettingLocation" : "StopGettingLocation" }
+    };
+  
+    const req = await fetch("https://exp.host/--/api/v2/push/send?useFcmV1=true", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    
+    await req.json();
+  } catch (error) {
+    console.log("Error sending push notification:", error);
+  }
 
-  const req = await fetch("https://exp.host/--/api/v2/push/send?useFcmV1=true", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
-  });
-
-  await req.json();
 }
 
 export async function POST(req, context) {
@@ -30,7 +35,7 @@ export async function POST(req, context) {
   if (!user) return new Response("user not found", { status: 404 });
 
   await setTracking(userId, action === "start");
-
+  console.log(`User ${userId} set tracking to ${action}`);
   if (user.pushToken) await sendPush(user.pushToken, action);
 
   return Response.json({ ok: true });

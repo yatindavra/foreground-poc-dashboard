@@ -1,4 +1,5 @@
 import clientPromise from "@/lib/db";
+import { ObjectId } from "mongodb";
 
 export async function getDB() {
   const client = await clientPromise;
@@ -7,7 +8,7 @@ export async function getDB() {
 
 export async function findUser(userId) {
   const db = await getDB();
-  return db.collection("users").findOne({ id: userId });
+  return db.collection("users").findOne({ _id: new ObjectId(userId)  });
 }
 
 export async function setTracking(userId, trackingDesired) {
@@ -19,10 +20,11 @@ export async function setTracking(userId, trackingDesired) {
 }
 
 export async function upsertUser(user) {
+  const {id, ...rest} = user;
   const db = await getDB();
   await db.collection("users").updateOne(
-    { id: user.id },
-    { $set: user },
+    { _id: new ObjectId(user.id)  },
+    { $set: rest },
     { upsert: true }
   );
 }
@@ -30,7 +32,7 @@ export async function upsertUser(user) {
 export async function pushLocationForUser(userId, loc) {
   const db = await getDB();
   await db.collection("users").updateOne(
-    { id: userId },
+    { _id: new ObjectId(userId)  },
     {
       $push: { locations: { $each: [loc], $slice: -10 } },
       $set: {

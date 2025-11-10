@@ -22,7 +22,8 @@ export default function Page() {
     const res = await fetch("/api/db", { cache: "no-store" });
     const json = await res.json();
     setUsers(json.users || []);
-    if (!selectedId && (json.users || []).length) setSelectedId(json.users[0].id);
+    console.log("Loaded users:", json.users);
+    if (!selectedId && (json.users || []).length) setSelectedId(json.users[0]._id);
   };
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Page() {
     return () => clearInterval(t);
   }, []);
 
-  const selected = useMemo(() => users.find(u => u.id === selectedId) || null, [users, selectedId]);
+  const selected = useMemo(() => users.find(u => u._id === selectedId) || null, [users, selectedId]);
 
   const act = async (action, userId) => {
     setLoading(true);
@@ -44,9 +45,9 @@ export default function Page() {
     <div style={{ display: "flex", height: "100vh" }}>
       <aside style={{ width: 280, borderRight: "1px solid #eee", padding: 16, overflowY: "auto" }}>
         <h3>Users</h3>
-        {users.map(u => (
-          <div key={u.id} onClick={() => setSelectedId(u.id)} style={{ padding: 8, marginBottom: 6, cursor: "pointer", borderRadius: 8, background: selectedId === u.id ? "#eef6ff" : "#f7f7f7" }}>
-            <div style={{ fontWeight: 600 }}>{u.name || u.id}</div>
+        {users.map((u,i) => (
+          <div key={i} onClick={() => setSelectedId(u._id)} style={{ padding: 8, marginBottom: 6, cursor: "pointer", borderRadius: 8, background: selectedId === u._id ? "#eef6ff" : "#f7f7f7" }}>
+            <div style={{ fontWeight: 600 }}>{u.name || u.email}</div>
             <div style={{ fontSize: 12, opacity: 0.7 }}>Tracking desired: {u.trackingDesired ? "yes" : "no"}</div>
             <div style={{ fontSize: 12, opacity: 0.7 }}>Last seen: {u.lastSeen || "—"}</div>
           </div>
@@ -58,10 +59,10 @@ export default function Page() {
           <div>Select a user</div>
         ) : (
           <>
-            <h2>{selected.name || selected.id}</h2>
+            <h2>{selected.email || selected._id}</h2>
             <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-              <button disabled={loading} onClick={() => act("start", selected.id)}>Start</button>
-              <button disabled={loading} onClick={() => act("stop", selected.id)}>Stop</button>
+              <button disabled={loading} onClick={() => act("start", selected._id)}>Start</button>
+              <button disabled={loading} onClick={() => act("stop", selected._id)}>Stop</button>
               <button onClick={load}>Refresh</button>
             </div>
 
@@ -74,7 +75,7 @@ export default function Page() {
                 >
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                   <Marker position={[selected.currentLocation.latitude, selected.currentLocation.longitude]} icon={icon}>
-                    <Popup>{selected.name || selected.id}</Popup>
+                    <Popup>{selected.name || selected._id}</Popup>
                   </Marker>
                 </MapContainer>
               </div>
