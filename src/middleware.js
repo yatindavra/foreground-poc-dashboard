@@ -35,5 +35,5 @@ export default async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/api/payload/:path*'],
+  matcher: ['/api/payload/:path*','/api/save-push-token/:path*' ],
 };
