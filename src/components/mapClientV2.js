@@ -28,8 +28,8 @@ export default function Page() {
 
   useEffect(() => {
     load();
-    const t = setInterval(load, 30000);
-    return () => clearInterval(t);
+    // const t = setInterval(load, 30000);
+    // return () => clearInterval(t);
   }, []);
 
   const selected = useMemo(() => users.find(u => u._id === selectedId) || null, [users, selectedId]);

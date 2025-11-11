@@ -14,7 +14,6 @@ export async function POST(req) {
   await upsertUser({ id: userId, pushToken, trackingDesired: false });
 
   return Response.json({
-    ok: true,
-    authorization
+    ok: true
   });
 }
