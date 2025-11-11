@@ -14,7 +14,7 @@ export async function findUser(userId) {
 export async function setTracking(userId, trackingDesired) {
   const db = await getDB();
   await db.collection("users").updateOne(
-    { id: userId },
+    { _id: new ObjectId(userId)  },
     { $set: { trackingDesired } }
   );
 }

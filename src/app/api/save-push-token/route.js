@@ -1,5 +1,4 @@
-import { cookies, headers } from "next/headers";
-import { upsertUser } from "../_utils";
+ import { upsertUser } from "../_utils";
 
 export async function POST(req) {
   const {  pushToken } = await req.json();
@@ -16,7 +15,6 @@ export async function POST(req) {
 
   return Response.json({
     ok: true,
-    authToken,
     authorization
   });
 }

@@ -5,6 +5,8 @@ async function sendPush(expoPushToken, action) {
     const body = {
       to: expoPushToken,
       priority: "high",
+      sound: "default",
+      title: "Tracking Update",
       data: { action: action}
     };
   
@@ -34,7 +36,7 @@ export async function POST(req, context) {
   const user = await findUser(userId);
   if (!user) return new Response("user not found", { status: 404 });
 
-  await setTracking(userId, action === "start");
+  await setTracking(userId, action);
   console.log(`User ${userId} set tracking to ${action}`);
   if (user.pushToken) await sendPush(user.pushToken, action);
 
