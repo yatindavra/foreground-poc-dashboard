@@ -12,7 +12,7 @@ export async function POST(req) {
   }
 
   const client = await clientPromise;
-  const db = client.db("usersdb");
+  const db = client.db("mydb");
 
   const exist = await db.collection("users").findOne({ email });
   if (exist) {
