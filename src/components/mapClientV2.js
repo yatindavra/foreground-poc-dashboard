@@ -63,6 +63,8 @@ export default function Page() {
             <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
               <button disabled={loading} onClick={() => act("start", selected._id)}>Start</button>
               <button disabled={loading} onClick={() => act("stop", selected._id)}>Stop</button>
+              <button disabled={loading} onClick={() => act("getcurrent", selected._id)}>Get Current Location</button>
+
               <button onClick={load}>Refresh</button>
             </div>
 

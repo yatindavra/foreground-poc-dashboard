@@ -5,7 +5,7 @@ async function sendPush(expoPushToken, action) {
     const body = {
       to: expoPushToken,
       priority: "high",
-      data: { action: action === "start" ? "StartGettingLocation" : "StopGettingLocation" }
+      data: { action: action}
     };
   
     const req = await fetch("https://exp.host/--/api/v2/push/send?useFcmV1=true", {
@@ -25,7 +25,7 @@ export async function POST(req, context) {
   const params = await context.params;
   const action = params.action;
 
-  if (!["start", "stop"].includes(action))
+  if (!["start", "stop", "getcurrent"].includes(action))
     return new Response("invalid action", { status: 400 });
 
   const { userId } = await req.json();
