@@ -5,8 +5,8 @@ async function sendPush(expoPushToken, action) {
     const body = {
       to: expoPushToken,
       priority: "high",
-      sound: "default",
-      title: "Tracking Update",
+      // sound: "default",
+      // title: "Tracking Update",
       data: { action: action}
     };
   
